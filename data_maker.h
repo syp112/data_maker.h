@@ -915,6 +915,10 @@ namespace file_operator
 		{
 			cerr<<"Task #"<<s<<":\nRUNTIME_ERROR\nreturn "<<res<<"\n";
 		}
+		else
+		{
+			cerr<<"DONE\n";
+		}
 		return;
 	}
 	void getans(int s,int t,string h=".ans")
@@ -935,6 +939,10 @@ namespace file_operator
 		if(res)
 		{
 			cerr<<"Task #"<<s<<":\nRUNTIME_ERROR\nreturn "<<res<<"\n";
+		}
+		else
+		{
+			cerr<<"DONE\n";
 		}
 		return;
 	}
