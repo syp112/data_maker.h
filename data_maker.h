@@ -529,6 +529,14 @@ namespace data_maker
 	{
 		for(auto s:opt)
 		{
+			if(s=="null")
+			{
+				continue;
+			}
+			if(s=="no_warning")
+			{
+				break;
+			}
 			if(s!="self_loop"&&s!="repeated_edges"&&s!="connected")
 			{
 				cerr<<"Warning. Invalid parameters : \""<<s<<"\"\n";
@@ -642,6 +650,14 @@ namespace data_maker
 	{
 		for(auto s:opt)
 		{
+			if(s=="null")
+			{
+				continue;
+			}
+			if(s=="no_warning")
+			{
+				break;
+			}
 			if(s!="self_loop"&&s!="repeated_edges"&&s!="connected")
 			{
 				cerr<<"Warning. Invalid parameters : \""<<s<<"\"\n";
@@ -718,6 +734,14 @@ namespace data_maker
 	{
 		for(auto s:opt)
 		{
+			if(s=="null")
+			{
+				continue;
+			}
+			if(s=="no_warning")
+			{
+				break;
+			}
 			if(s!="self_loop"&&s!="repeated_edges"&&s!="connected")
 			{
 				cerr<<"Warning. Invalid parameters : \""<<s<<"\"\n";
