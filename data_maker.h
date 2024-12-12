@@ -8,6 +8,31 @@
 #include <functional>
 #include <cmath>
 using namespace std;
+string to_string()
+{
+	return "";
+}
+template<typename... V>
+string to_string(unsigned long long s1,V... s2)
+{
+	return to_string(s1)+to_string(s2...);
+}
+template<typename... V>
+string to_string(long long s1,V... s2)
+{
+	return to_string(s1)+to_string(s2...);
+}
+template<typename... V>
+string to_string(string s1,V... s2)
+{
+	return s1+to_string(s2...);
+}
+template<typename... V>
+string to_string(const char* s,V... s2)
+{
+	string s1=s;
+	return s1+to_string(s2...);
+}
 namespace data_maker
 {
 	mt19937_64 rand_int(time(0));
@@ -814,6 +839,48 @@ namespace data_maker
 		return r;
 	}
 	#define int long long
+	template<typename T=int>
+	struct range_taking
+	{
+		vector<pair<pair<int,int>,T>>q;
+		void operator ()(int l,int r,T v)
+		{
+			q.push_back({{l,r},v});
+			return;
+		}
+		template<typename... Val>
+		void operator ()(int l,int r,T v,Val... val)
+		{
+			(*this)(l,r,v);
+			(*this)(val...);
+			return;
+		}
+		void list(int id,T v)
+		{
+			(*this)(id,id,v);
+			return;
+		}
+		template<typename... Val>
+		void list(int id,T v,Val... val)
+		{
+			list(id,v);
+			list(id+1,val...);
+			return;
+		}
+		T operator [](int s)
+		{
+			for(auto [t,v]:q)
+			{
+				auto [l,r]=t;
+				if(s<=l&&s<=r)
+				{
+					return v;
+				}
+			}
+			throw runtime_error(to_string("range_taking not found ",s));
+		}
+	};
+	/*#define int long long
 	struct range_taking
 	{
 		struct node
@@ -881,27 +948,27 @@ namespace data_maker
 			q.insert({-1000000000000000,1000000000000000,-2147483647});
 		}
 	};
-	#undef int
+	#undef int*/
 }
 namespace file_operator
 {
 	string title;
 	void open_file(int s,string h=".in")
 	{
-		freopen((title+to_string(s)+h).c_str(),"w",stdout);
+		freopen(to_string(title,s,h).c_str(),"w",stdout);
 		return;
 	}
 	void open_file(int s,int t,string h=".in")
 	{
-		freopen((title+to_string(s)+"-"+to_string(t)+h).c_str(),"w",stdout);
+		freopen(to_string(title,s,"-",t,h).c_str(),"w",stdout);
 		return;
 	}
 	void getans(int s,string h=".ans")
 	{
 		cerr<<"RUNNING ON Task "<<title<<s<<"\n";
 		cout<<flush;
-		freopen((title+to_string(s)+".in").c_str(),"r",stdin);
-		freopen((title+to_string(s)+h).c_str(),"w",stdout);
+		freopen(to_string(title,s,".in").c_str(),"r",stdin);
+		freopen(to_string(title,s,h).c_str(),"w",stdout);
 		bool res;
 		#ifdef __linux__
 			res=system(("./"+title).c_str());
@@ -925,8 +992,8 @@ namespace file_operator
 	{
 		cerr<<"RUNNING ON Task "<<title<<s<<"-"<<t<<"\n";
 		cout<<flush;
-		freopen((title+to_string(s)+"-"+to_string(t)+".in").c_str(),"r",stdin);
-		freopen((title+to_string(s)+"-"+to_string(t)+h).c_str(),"w",stdout);
+		freopen(to_string(title,s,"-",t,".in").c_str(),"r",stdin);
+		freopen(to_string(title,s,"-",t,h).c_str(),"w",stdout);
 		bool res;
 		#ifdef __linux__
 			res=system(("./"+title).c_str());
