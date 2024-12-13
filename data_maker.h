@@ -8,19 +8,6 @@
 #include <functional>
 #include <cmath>
 using namespace std;
-string to_string()
-{
-	return "";
-}
-string to_string(string s)
-{
-	return s;
-}
-template<typename V1,typename... V2>
-string to_string(V1 s1,V2... s2)
-{
-	return to_string(s1)+to_string(s2...);
-}
 namespace data_maker
 {
 	mt19937_64 rand_int(time(0));
@@ -865,7 +852,7 @@ namespace data_maker
 					return v;
 				}
 			}
-			throw runtime_error(to_string("range_taking not found ",s));
+			throw runtime_error("range_taking not found "+to_string(s));
 		}
 	};
 	/*#define int long long
@@ -943,20 +930,20 @@ namespace file_operator
 	string title;
 	void open_file(int s,string h=".in")
 	{
-		freopen(to_string(title,s,h).c_str(),"w",stdout);
+		freopen((title+to_string(s)+h).c_str(),"w",stdout);
 		return;
 	}
 	void open_file(int s,int t,string h=".in")
 	{
-		freopen(to_string(title,s,"-",t,h).c_str(),"w",stdout);
+		freopen((title+to_string(s)+h).c_str(),"w",stdout);
 		return;
 	}
 	void getans(int s,string h=".ans")
 	{
 		cerr<<"RUNNING ON Task "<<title<<s<<"\n";
 		cout<<flush;
-		freopen(to_string(title,s,".in").c_str(),"r",stdin);
-		freopen(to_string(title,s,h).c_str(),"w",stdout);
+		freopen((title+to_string(s)+".in").c_str(),"r",stdin);
+		freopen((title+to_string(s)+h).c_str(),"w",stdout);
 		bool res;
 		#ifdef __linux__
 			res=system(("./"+title).c_str());
@@ -980,8 +967,8 @@ namespace file_operator
 	{
 		cerr<<"RUNNING ON Task "<<title<<s<<"-"<<t<<"\n";
 		cout<<flush;
-		freopen(to_string(title,s,"-",t,".in").c_str(),"r",stdin);
-		freopen(to_string(title,s,"-",t,h).c_str(),"w",stdout);
+		freopen((title+to_string(s)+"-"+to_string(t)+".in").c_str(),"r",stdin);
+		freopen((title+to_string(s)+"-"+to_string(t)+h).c_str(),"w",stdout);
 		bool res;
 		#ifdef __linux__
 			res=system(("./"+title).c_str());
