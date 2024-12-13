@@ -935,7 +935,7 @@ namespace file_operator
 	}
 	void open_file(int s,int t,string h=".in")
 	{
-		freopen((title+to_string(s)+h).c_str(),"w",stdout);
+		freopen((title+to_string(s)+"-"+to_string(t)+h).c_str(),"w",stdout);
 		return;
 	}
 	void getans(int s,string h=".ans")
