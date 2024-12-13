@@ -844,10 +844,11 @@ namespace data_maker
 		}
 		T operator [](int s)
 		{
-			for(auto [t,v]:q)
+			for(auto i=q.rbegin();i!=q.rend();i++)
 			{
+				auto [t,v]=*i;
 				auto [l,r]=t;
-				if(s<=l&&s<=r)
+				if(l<=s&&s<=r)
 				{
 					return v;
 				}
