@@ -12,26 +12,14 @@ string to_string()
 {
 	return "";
 }
-template<typename... V>
-string to_string(unsigned long long s1,V... s2)
+string to_string(string s)
+{
+	return s;
+}
+template<typename V1,typename... V2>
+string to_string(V1 s1,V2... s2)
 {
 	return to_string(s1)+to_string(s2...);
-}
-template<typename... V>
-string to_string(long long s1,V... s2)
-{
-	return to_string(s1)+to_string(s2...);
-}
-template<typename... V>
-string to_string(string s1,V... s2)
-{
-	return s1+to_string(s2...);
-}
-template<typename... V>
-string to_string(const char* s,V... s2)
-{
-	string s1=s;
-	return s1+to_string(s2...);
 }
 namespace data_maker
 {
