@@ -8,6 +8,33 @@
 #include <functional>
 #include <cmath>
 using namespace std;
+namespace color_print
+{
+	#ifdef _WIN32
+		#include <windows.h>
+		const int RED=FOREGROUND_RED;
+	    const int GREEN=FOREGROUND_GREEN;
+	    const int BLUE=FOREGROUND_BLUE;
+	    const int WHITE=FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE;
+	#else
+		const int RED=1;
+	    const int GREEN=2;
+	    const int BLUE=4;
+	    const int WHITE=7;
+	#endif
+    void print(string s,int c)
+    {
+    	#ifdef _WIN32
+		    SetConsoleTextAttribute(GetStdHandle(STD_ERROR_HANDLE),c);
+	    	cerr<<s<<endl;
+		    SetConsoleTextAttribute(GetStdHandle(STD_ERROR_HANDLE),WHITE);
+		#elif __linux__
+			string t="\033[1;"+to_string(30+c)+"m";
+			cerr<<t<<s<<"\033[0m"<<endl;
+		#endif
+	    return;
+	}
+}
 namespace data_maker
 {
 	mt19937_64 rand_int(time(0));
@@ -928,6 +955,7 @@ namespace data_maker
 }
 namespace file_operator
 {
+	using namespace color_print;
 	string title;
 	void open_file(int s,string h=".in")
 	{
@@ -956,11 +984,11 @@ namespace file_operator
 		#endif
 		if(res)
 		{
-			cerr<<"Task #"<<s<<":\nRUNTIME_ERROR\nreturn "<<res<<"\n";
+			print("Task #"+to_string(s)+":\nRUNTIME_ERROR\nreturn "+to_string(res)+"\n",RED);
 		}
 		else
 		{
-			cerr<<"DONE\n";
+			print("Done\n",GREEN);
 		}
 		return;
 	}
@@ -981,11 +1009,11 @@ namespace file_operator
 		#endif
 		if(res)
 		{
-			cerr<<"Task #"<<s<<":\nRUNTIME_ERROR\nreturn "<<res<<"\n";
+			print("Task #"+to_string(s)+"-"+to_string(t)+":\nRUNTIME_ERROR\nreturn "+to_string(res)+"\n",RED);
 		}
 		else
 		{
-			cerr<<"DONE\n";
+			print("Done\n",GREEN);
 		}
 		return;
 	}
