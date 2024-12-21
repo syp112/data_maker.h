@@ -14,12 +14,18 @@ namespace color_print
 		#include <windows.h>
 		const int RED=FOREGROUND_RED;
 	    const int GREEN=FOREGROUND_GREEN;
+	    const int YELLOW=FOREGROUND_RED|FOREGROUND_GREEN;
 	    const int BLUE=FOREGROUND_BLUE;
+	    const int PURPLE=FOREGROUND_RED|FOREGROUND_BLUE;
+	    const int CYAN=FOREGROUND_GREEN|FOREGROUND_BLUE;
 	    const int WHITE=FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE;
 	#else
 		const int RED=1;
 	    const int GREEN=2;
+	    const int YELLOW=3;
 	    const int BLUE=4;
+	    const int PURPLE=5;
+	    const int CYAN=6;
 	    const int WHITE=7;
 	#endif
     void print(string s,int c)
