@@ -8,6 +8,19 @@
 #include <functional>
 #include <cmath>
 using namespace std;
+string to_string(string s)
+{
+	return s;
+}
+string to_string(const char *s)
+{
+	return (string)s;
+}
+template<typename T1,typename ...T2>
+string to_string(T1 s1,T2 ...s2)
+{
+	return to_string(s1)+to_string(s2...);
+}
 namespace color_print
 {
 	#ifdef _WIN32
