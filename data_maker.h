@@ -67,13 +67,22 @@ namespace distrabution
 	{
 		return rand_real(rand_int)*(r-l)+l;
 	}
-	double log_uniform_distribution(long long V)
+	double loguniform_distribution(long long V)
 	{
 		if(V<=1)
 		{
 			throw invalid_argument("V must be greater than 1");
 		}
 		return exp(rnd_real(0,1)*log(1.0*V));
+	}
+	double exp_distribution(double t)
+	{
+		if(t<=1.0)
+		{
+		    throw invalid_argument("t must be greater than 1");
+		}
+		exponential_distribution<double> dis(log(t));
+		return dis(rand_int);
 	}
 	#undef int
 }
