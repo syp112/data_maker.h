@@ -54,11 +54,34 @@ namespace color_print
 	    return;
 	}
 }
-namespace data_maker
+namespace distrabution
 {
+	#define int long long
 	mt19937_64 rand_int(time(0));
 	uniform_real_distribution<double> rand_real(0,1);
+	int rnd(int l,int r)
+	{
+		return rand_int()%(r-l+1)+l;
+	}
+	double rnd_real(double l=0,double r=1)
+	{
+		return rand_real(rand_int)*(r-l)+l;
+	}
+	double log_uniform_distribution(long long V)
+	{
+		if(V<=1)
+		{
+			throw invalid_argument("V must be greater than 1");
+		}
+		return exp(rnd_real(0,1)*log(1.0*V));
+	}
+	#undef int
+}
+namespace data_maker
+{
 	#define int long long
+	mt19937_64 rand_int(time(0));
+	uniform_real_distribution<double> rand_real(0,1);
 	int rnd(int l,int r)
 	{
 		return rand_int()%(r-l+1)+l;
