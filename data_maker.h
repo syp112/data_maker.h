@@ -16,6 +16,10 @@ string to_string(const char *s)
 {
 	return (string)s;
 }
+string to_string()
+{
+	return "";
+}
 template<typename T1,typename ...T2>
 string to_string(T1 s1,T2 ...s2)
 {
@@ -54,7 +58,7 @@ namespace color_print
 	    return;
 	}
 }
-namespace distrabution
+namespace distribution
 {
 	#define int long long
 	mt19937_64 rand_int(time(0));
@@ -264,7 +268,7 @@ namespace data_maker
 		{
 			if(i!=st&&rnd_real()<p)
 			{
-				*i=st[rnd(0,i-st)];
+				*i=st[rnd(0,i-st-1)];
 			}
 			else
 			{
